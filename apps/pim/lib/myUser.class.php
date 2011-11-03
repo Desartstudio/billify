@@ -1,8 +1,8 @@
 <?php
 
-class myUser extends sfBasicSecurityUser
+class myUser extends sfGuardSecurityUser 
 {
-  private $user;
+  protected $user;
 
   public function __toString()
   {
@@ -24,8 +24,10 @@ class myUser extends sfBasicSecurityUser
     return $this->getAttribute('id_utente');
   }
 
-  public function signin(Utente $utente)
+  public function signin($utente, $remember = false, $con = null)
   {
+    
+    $this->setAttribute('user_id', $utente->getId(), 'sfGuardSecurityUser');
     $this->setAuthenticated(true);
     $this->setAttribute('id_utente', $utente->getId());
     $this->setAttribute('nome', $utente->getNome());
@@ -34,10 +36,10 @@ class myUser extends sfBasicSecurityUser
 
     FatturaPeer::$user_id = $utente->getId();
 
-    if($utente->getUsername() == 'admin'){
+/*    if($this->isSuperAdmin()){
       $this->addCredential('admin');
     }
-
+*/
     $this->addCredential('attivo');
     
     $utente->setLastlogin(time());

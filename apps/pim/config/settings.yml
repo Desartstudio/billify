@@ -44,3 +44,4 @@ all:
     cache:                  off
     rich_text_fck_js_dir:  js/FCKeditor
     rich_text_fck_base_dir:  progetti/pimonline/web/js/FCKeditor
+    enabled_modules:        [default, sfGuardAuth]

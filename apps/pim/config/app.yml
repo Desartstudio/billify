@@ -15,5 +15,8 @@ all:
   prezzo:
     base: 5.9
 
+  sf_guard_plugin:
+    routes_register: false
+
   cashflow:
     paginator_offset: 50

@@ -30,11 +30,11 @@ class loginActions extends sfActions
 
   }
 
-  public function executeLogin()
+  public function executeLogin(sfWebRequest $request)
   {
     $criteria = new Criteria();
-    $criteria->add(UtentePeer::USERNAME, $this->getRequestParameter('login'));
-    $criteria->add(UtentePeer::PASSWORD, md5($this->getRequestParameter('password')));
+    $criteria->add(UtentePeer::USERNAME, $request->getParameter('login'));
+    $criteria->add(UtentePeer::PASSWORD, md5($request->getParameter('password')));
 
     $utente = UtentePeer::doSelectOne($criteria);
 
