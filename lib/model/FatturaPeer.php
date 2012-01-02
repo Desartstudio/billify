@@ -38,8 +38,16 @@ class FatturaPeer extends BaseFatturaPeer
   {
     if (!$fattura_id) 
     {
-      $fattura = new Vendita();
-      $fattura->setData(time());
+      
+      $last_invoice = FatturaPeer::retrieveLastValidInvoice();
+      $date = time();
+      if ($date < $last_invoice->getData('U'))
+      {
+        $date = $last_invoice->getData('U');
+      }
+
+      $fattura = new Vendita();      
+      $fattura->setData($date);
       $fattura->setNewNumFattura();
       $fattura->setNew(true);
       
@@ -136,5 +144,20 @@ class FatturaPeer extends BaseFatturaPeer
     return $total;
   }
 
+  public static function retrieveLastValidInvoice()
+  {
+    $criteria = new Criteria();
+    
+    $criteria->add(FatturaPeer::ID_UTENTE, self::$user_id);
+    $criteria->addAnd(FatturaPeer::DATA, date('Y-m-d', mktime(0, 0, 0, 1, 1, date('Y'))), Criteria::GREATER_EQUAL);
+    $criteria->addAnd(FatturaPeer::DATA, date('Y-m-d', mktime(0, 0, 0, 12, 31, date('Y'))), Criteria::LESS_EQUAL);
+    
+    $criteria->addAsColumn('integer_num_fattura', 'CONVERT('.FatturaPeer::NUM_FATTURA.', signed)');
+    $criteria->addDescendingOrderByColumn('integer_num_fattura');
+    
+    FatturaPeer::addSelectColumns($criteria);    
+    return FatturaPeer::doSelectOne($criteria);
+  }
+  
 }
 

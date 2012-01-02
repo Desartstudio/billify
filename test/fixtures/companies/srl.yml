@@ -16,6 +16,11 @@ Utente:
     password: user
     stato: attivo
 
+sfGuardPermission:
+  Utente_1:
+    name:           attivo
+    description:    utente attivo
+
 ModoPagamento:
   ModoPagamento_1:
     id_utente: Utente_1

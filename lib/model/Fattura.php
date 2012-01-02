@@ -337,9 +337,16 @@ abstract class Fattura extends BaseFattura
     $this->setData(date('y-m-d', time()));
   }
 
-  public function setData($v)
+  /**
+   * se la data inserita è precedente a fatture già emesse 
+   * viene corretta automaticamente con la stessa data 
+   * dell'ultima fattura valida
+   * 
+   * @param timestamp $date
+   */
+  public function setData($date = null)
   {
-    parent::setData($v);
+    parent::setData($date);
     $this->setAnno(date('Y', $this->getData('U')));
   }
 

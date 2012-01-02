@@ -34,7 +34,7 @@ class fatturaActions extends sfActions
 
   public function executeCreate($request)
   {
-    $this->cliente = ContattoPeer::retrieveByPK($request->getParameter('id_cliente'));
+    $this->cliente = ContattoPeer::retrieveByPK($request->getParameter('id_cliente'));  
     $this->fattura = FatturaPeer::getFatturaOrCreate(0, $this->cliente);
     $this->makeFattura();
 
@@ -70,7 +70,7 @@ class fatturaActions extends sfActions
         $this->getRequest()->setParameter('calcola_ritenuta_acconto', $this->cliente->getCalcolaRitenutaAcconto());
         $this->getRequest()->setParameter('includi_tasse', $this->cliente->getIncludiTasse());
         $this->getRequest()->setParameter('calcola_tasse', $this->cliente->getCalcolaTasse());
-        $this->getRequest()->setParameter('data', date("d/m/Y", time()));
+        $this->getRequest()->setParameter('data', date("d/m/Y", $this->fattura->getData('U')));
         $this->getRequest()->setParameter('num_fattura', $this->fattura->getNumFattura());
 		$this->getRequest()->setParameter('id_tema_fattura', $this->fattura->getIdTemaFattura());
         
@@ -216,8 +216,8 @@ class fatturaActions extends sfActions
       $this->forward404Unless($fattura instanceof Fattura);
 
       $new_fattura = $fattura->copy(true);
-      $new_fattura->setNewNumFattura();
-      $new_fattura->setData(date('Y-m-d', time()));
+      $new_fattura->setNumFattura(0);
+      $new_fattura->setData();
       $new_fattura->setStato('n');
       $new_fattura->setIvaPagata('n');
       $new_fattura->setCommercialista('n');
