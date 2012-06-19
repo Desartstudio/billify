@@ -5,6 +5,9 @@ Options +FollowSymLinks +ExecCGI
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+#  RewriteLog "/var/log/httpd/rewrite.log" 
+#  RewriteCond %{HTTPS} off
+#  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
   # we skip all files with .something
   RewriteCond %{REQUEST_URI} \..+$

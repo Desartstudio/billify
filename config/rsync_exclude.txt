@@ -6,7 +6,7 @@
 /doc/*
 /nbproject
 .git
-/web/billify.php
+web/billify.php
 .htaccess
-/test
+#/test
 /build

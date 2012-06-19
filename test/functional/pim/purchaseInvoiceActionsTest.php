@@ -99,7 +99,7 @@ $browser->
   click('Filtra')->
   with('response')->begin()->
     checkElement('td', '!/pagata/')->
-    checkElement('.fatture tbody tr ', 10)->
+    checkElement('.fatture tbody tr ', 9)->
   end()->
   setField('fattura_filters[data][from]', date('d/m/Y', strtotime('first day of last month')))->
   setField('fattura_filters[data][to]', date('t/m/Y', strtotime('first day of last month')))->
@@ -194,7 +194,7 @@ $purchase = FatturaPeer::doSelectOne($criteria);
 $browser->info('cancello una fattura di un fornitore')->
          get('/invoices/purchase')->
   with('response')->begin()->
-    checkElement('a[title="delete"]', 11)->    
+    checkElement('a[title="delete"]', 10)->    
     checkElement('a[title="delete"][href="/index.php/invoice/delete/id/'.$purchase->getId().'"]', 1)->
   end()->        
   get('/invoice/delete/id/'.$purchase->getId())->

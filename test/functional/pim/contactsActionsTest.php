@@ -46,7 +46,7 @@ $browser->
   checkResponseElement('.fatture td', 'Pro-Forma', array('position' => 16))->        
   checkResponseElement('.fatture td', '1', array('position' => 24))->        
   checkResponseElement('.fatture td', '2', array('position' => 32))->        
-  checkResponseElement('.fatture td', '3', array('position' => 40))->        
+  checkResponseElement('.fatture td', '3', array('position' => 40))->
   checkResponseElement('.title h2', '/01 Azienda/')->
   checkResponseElement('#contatti', '/via degli ulivi, 19/')->
   checkResponseElement('#contatti', '/60100 Milano \(MI\)/')->
@@ -54,7 +54,7 @@ $browser->
   checkResponseElement('#contatti', '/Referente: Utente utente/')->
   checkResponseElement('#contatti', '/E-Mail: azienda@example.it/')->
   checkResponseElement('#contatti', '/P.IVA: 343810309/')->
-  checkResponseElement('select[name="year"] option[selected]', '/2011/')->
+  checkResponseElement('select[name="year"] option[selected]', '/'.date("Y").'/')->
   checkResponseElement('.total .stimato', '/6.000/')->
   checkResponseElement('.total', '/3.000/');
       
