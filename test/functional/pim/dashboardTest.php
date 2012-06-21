@@ -16,7 +16,7 @@ $browser->
   checkResponseElement('h2', 'fatture da incassare', array('position' => 1))->
   checkResponseElement('table.fatture', 2)->
   checkResponseElement('table.fatture tr', 41)->
-  checkResponseElement('table.fatture th', 16)->
+  checkResponseElement('table.fatture th', 17)->
   checkResponseElement('table.fatture th', 'n.', array('position' => 0))->
   checkResponseElement('table.fatture th', 'ragione sociale', array('position' => 1))->
   checkResponseElement('table.fatture th', 'data', array('position' => 2))->
@@ -40,18 +40,18 @@ $browser->
   checkResponseElement('.invoice-7', 2)->
   checkResponseElement('.invoice-7 td', date('d/m/Y', strtotime('+7 days',  strtotime('first day of this month'))), array('position' => 10))->
         
-  checkResponseElement('.invoice-pro-forma td', '/1.000,00/', array('position' => 11))->
-  checkResponseElement('.invoice-pro-forma td', '/1.440,00/', array('position' => 12))->
-  checkResponseElement('.invoice-pro-forma td', 'non inviata', array('position' => 13))->
-  checkResponseElement('.invoice-pro-forma td', 'no', array('position' => 14))->
+  checkResponseElement('.invoice-pro-forma td', '/1.000,00/', array('position' => 12))->
+  checkResponseElement('.invoice-pro-forma td', '/1.440,00/', array('position' => 13))->
+  checkResponseElement('.invoice-pro-forma td', 'non inviata', array('position' => 14))->
+  checkResponseElement('.invoice-pro-forma td', 'no', array('position' => 15))->
 
 // Sorting test
   checkResponseElement('table.fatture td', '/Pro-Forma/', array('position' => 0))->
-  checkResponseElement('table.fatture td', '/Pro-Forma/', array('position' => 8))->
-  checkResponseElement('table.fatture td', '/Pro-Forma/', array('position' => 16))->
-  checkResponseElement('table.fatture td', '/Pro-Forma/', array('position' => 24))->
-  checkResponseElement('table.fatture td', '1', array('position' => 32))->
-  checkResponseElement('table.fatture td', '2', array('position' => 40))->
+  checkResponseElement('table.fatture td', '/Pro-Forma/', array('position' => 9))->
+  checkResponseElement('table.fatture td', '/Pro-Forma/', array('position' => 18))->
+  checkResponseElement('table.fatture td', '/Pro-Forma/', array('position' => 27))->
+  checkResponseElement('table.fatture td', '1', array('position' => 36))->
+  checkResponseElement('table.fatture td', '2', array('position' => 45))->
 
   checkResponseElement('body', '!/Ritenuta d\'acconto versata/')
 ;

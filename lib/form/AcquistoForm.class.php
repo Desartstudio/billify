@@ -26,9 +26,9 @@ class AcquistoForm extends FatturaForm
     $widgets['vat'] = new sfWidgetFormPropelChoice(array('model' => 'CodiceIva', 'key_method' => 'getValore'));
     $widgets['class_key'] = new sfWidgetFormInputHidden();
     $widgets['stato'] = new sfWidgetFormSelect(array('choices' => self::$states));
-    $widgets['data_stato'] = new sfWidgetFormDateJQueryUI(array("change_month" => true, "change_year" => true, 'culture' => 'it'));
+    $widgets['data_stato'] = new sfWidgetFormDateJQueryUI(array("change_month" => true, "change_year" => true, 'culture' => 'it', 'show_button_panel' => true));
 
-    $widgets['data'] = new sfWidgetFormDateJQueryUI(array("change_month" => true, "change_year" => true, 'culture' => 'it'));
+    $widgets['data'] = new sfWidgetFormDateJQueryUI(array("change_month" => true, "change_year" => true, 'culture' => 'it', 'show_button_panel' => true));
     
     $this->widgetSchema->moveField('data_stato', sfWidgetFormSchema::AFTER, 'stato');
 

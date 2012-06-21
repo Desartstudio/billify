@@ -102,8 +102,7 @@ class FatturaPeer extends BaseFatturaPeer
       $criteria->addAnd(FatturaPeer::DATA, date('Y-m-d', mktime(0, 0, 0, 12, 31, $year)), Criteria::LESS_EQUAL);
     }
     
-    $criteria->addAsColumn('integer_num_fattura', 'CONVERT('.FatturaPeer::NUM_FATTURA.', signed)');
-    $criteria->addAscendingOrderByColumn('integer_num_fattura');
+    $criteria->addAscendingOrderByColumn(FatturaPeer::NUM_FATTURA);
     
     FatturaPeer::addSelectColumns($criteria);    
     return FatturaPeer::doSelect($criteria);

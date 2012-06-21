@@ -8,5 +8,8 @@
 .git
 web/billify.php
 .htaccess
-#/test
+/test
 /build
+.gitignore
+README.md
+/config

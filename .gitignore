@@ -7,3 +7,4 @@ log/*
 nbproject/
 /build
 config/databases.yml
+config/properties.ini

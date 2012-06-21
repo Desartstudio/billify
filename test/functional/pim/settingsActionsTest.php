@@ -93,6 +93,6 @@ $browser->
   end()->
   click('lista fatture di vendita')->
   with('response')->begin()->
-    checkElement('table.fatture td', '001-'.date('Y'), array('position' => 31))->
+    checkElement('table.fatture td', '001-'.date('Y'), array('position' => 34))->
   end();
 ;

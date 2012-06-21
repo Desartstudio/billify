@@ -18,6 +18,9 @@
     <th><?php echo __('copia')?></th>
   <?php endif; ?>
   <th><?php echo __('pdf')?></th>
+  <?php  if  (!isset($invoice_type) || $invoice_type != 'da_incassare'): ?>
+  <th><?php echo __('delete')?></th>
+  <?php  endif; ?>
 </tr>
 </thead>
 <tbody>
@@ -45,6 +48,9 @@
     <?php endif; ?>
       
     <td><?php echo link_to(image_tag('/images/icons/file_acrobat.gif',array('alt'=>'esporta in pdf')),'fattura/export?id='.$invoice->getID(),array('target' => '_blank'))?></td>
+    <?php if ($invoice->getStato() == 'n'): ?>
+    <td><?php echo link_to(image_tag('icons_tango/trash-full.png', 'alt=delete'), 'invoice/delete?id='.$invoice->getId(), 'post=true&confirm=vuoi cancellare questa fattura? title=delete') ?></td>
+    <?php endif; ?>
   </tr>
 <?php endforeach; ?>
 </tbody>

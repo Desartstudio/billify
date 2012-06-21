@@ -4,6 +4,8 @@
   <h2><?php echo $sf_request->getParameter('type') == ContattoPeer::CLASSKEY_FORNITORE ? __('Fornitori') : __('Clienti')?></h2>
 </div>
 
+<?php echo pager($pager, $sf_request, array('class' => 'pagination')) ?>
+
 <table class="fatture rubrica  zebra-striped" width="100%" >
 <thead>
 <tr>
