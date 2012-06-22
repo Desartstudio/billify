@@ -12,7 +12,7 @@ $browser->
 
   with('response')->begin()->
     checkElement('table', 1)->
-    checkElement('table.fatture th', 10)->
+    checkElement('table.fatture th', 11)->
     checkElement('table.fatture th', 'n.', array('position' => 1))->
     checkElement('table.fatture th', 'ragione sociale', array('position' => 2))->
     checkElement('table.fatture th', 'data', array('position' => 3))->
