@@ -333,7 +333,7 @@ Vendita:
     id_utente: Utente_1
     cliente_id: Cliente_2
     num_fattura: '<?php echo $i+1; ?>'
-    data: '<?php echo date('Y-m-d', strtotime('-1 month'))?>'
+    data: '<?php echo date('Y-m-d', strtotime('-1 month', strtotime('first day of this month')))?>'
     modo_pagamento_id: ModoPagamento_2
     stato: p
     vat: 20
