@@ -138,6 +138,8 @@
     <column name="spese_anticipate" type="float" default="0" />
     <column name="imposte" type="double" />
     <column name="imponibile" type="double" />
+    <column name="ritenuta_dacconto" type="double" />
+    <column name="pie_di_lista" type="double" />
     <column name="stato" type="char" default="n" />
     <column name="iva_pagata" type="char" default="n" />
     <column name="iva_depositata" type="char" default="n" />

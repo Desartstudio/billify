@@ -40,13 +40,13 @@ $browser->
   info('check for single contact page')->
   click('lista clienti')->
   click('01 Azienda')->
-  checkResponseElement('.fatture tr', 7)->        
-  checkResponseElement('.fatture td', 'Pro-Forma', array('position' => 0))->        
-  checkResponseElement('.fatture td', 'Pro-Forma', array('position' => 9))->        
-  checkResponseElement('.fatture td', 'Pro-Forma', array('position' => 18))->        
-  checkResponseElement('.fatture td', '1', array('position' => 27))->        
-  checkResponseElement('.fatture td', '2', array('position' => 36))->        
-  checkResponseElement('.fatture td', '3', array('position' => 45))->
+  checkResponseElement('.fatture tr', 7)->
+  checkResponseElement('.fatture td', 'Pro-Forma', array('position' => 0))->
+  checkResponseElement('.fatture td', 'Pro-Forma', array('position' => 9))->
+  checkResponseElement('.fatture td', 'Pro-Forma', array('position' => 18))->
+  checkResponseElement('.fatture td', '3', array('position' => 27))->
+  checkResponseElement('.fatture td', '2', array('position' => 36))->
+  checkResponseElement('.fatture td', '1', array('position' => 45))->
   checkResponseElement('.title h2', '/01 Azienda/')->
   checkResponseElement('#contatti', '/via degli ulivi, 19/')->
   checkResponseElement('#contatti', '/60100 Milano \(MI\)/')->
@@ -57,7 +57,7 @@ $browser->
   checkResponseElement('select[name="year"] option[selected]', '/'.date("Y").'/')->
   checkResponseElement('.total .stimato', '/6.000/')->
   checkResponseElement('.total', '/3.000/');
-      
+
 
 $browser->
   get('/')->
