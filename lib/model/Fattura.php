@@ -41,7 +41,7 @@ abstract class Fattura extends BaseFattura
       self::RIFIUTATA => 'important',
       self::INVIATA => 'info'
   );
-  
+
   protected $imponibile = 0;
   protected $imponibile_scorporato = 0;
   protected $imponibile_fine_iva = 0;
@@ -54,7 +54,7 @@ abstract class Fattura extends BaseFattura
   protected $calcola = false;
   protected $tipo_ritenuta;
   protected $costo_tasse_ulteriori = 0;
-  protected $id_tema_fattura = null; 
+  protected $id_tema_fattura = null;
 
   private function calcScontoTotale()
   {
@@ -330,7 +330,7 @@ abstract class Fattura extends BaseFattura
   {
     return $this->stato_string;
   }
-  
+
   public function setRegolare()
   {
     $this->setNewNumFattura();
@@ -373,7 +373,7 @@ abstract class Fattura extends BaseFattura
 
   public function isProForma()
   {
-    if ($this->getNumFattura() == 0)
+    if (!strcmp($this->getNumFattura(), 0))
     {
       return true;
     }
@@ -385,7 +385,7 @@ abstract class Fattura extends BaseFattura
   {
     return (strtotime($this->getDataPagamento()) < time() && $this->getStato() == self::INVIATA);
   }
-  
+
   public function delete(PropelPDO $con = null)
   {
     $dettagli_fattura = $this->getDettagliFatturas();
@@ -428,10 +428,10 @@ abstract class Fattura extends BaseFattura
 
   public function getIdTemaFattura()
   {
-    
+
     if (!parent::getIdTemaFattura() && $this->class_key == FatturaPeer::CLASSKEY_VENDITA)
     {
-    
+
       if (!$this->getCliente())
       {
         $this->setIdTemaFattura(TemaFatturaPeer::doSelect(new Criteria()));
@@ -440,24 +440,24 @@ abstract class Fattura extends BaseFattura
       {
         $this->setIdTemaFattura($this->getCliente()->getTemaFattura()->getId());
       }
-    
+
       $this->save();
     }
-    
+
     return parent::getIdTemaFattura();
 
   }
-  
+
   /**
    * Se la fattura è stata spedita allora non è più editabile
-   * 
+   *
    * @return boolean
    */
   public function isEditable()
   {
     return !(in_array($this->getStato(), array(Vendita::INVIATA, Vendita::PAGATA, Vendita::RIFIUTATA)));
   }
-  
+
   abstract public function addToCashFlow(CashFlow $cf);
 }
 

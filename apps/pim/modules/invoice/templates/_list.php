@@ -27,7 +27,7 @@
 <?php foreach ($results as $invoice): $invoice->calcolaFattura($taxes, $sf_user->getSettings()->getTipoRitenuta(), $sf_user->getSettings()->getRitenutaAcconto()); ?>
 
   <?php $routing_url = ($invoice instanceof Acquisto)? '@invoice_edit':'@invoice_show'; ?>
-  
+
   <tr class="invoice-<?php echo strtolower($invoice->getShortName()); ?>">
     <?php if (!isset($batch) || $batch): ?>
       <td><input type="checkbox" name="delete[]" value="<?php echo $invoice->getId()?>"></td>
@@ -46,7 +46,7 @@
     <?php if (!isset($copy) || $copy): ?>
       <td><?php echo link_to(image_tag('/images/icons_tango/copy.png',array('alt'=>'crea copia fattura')), 'fattura/copia?id='.$invoice->getID())?></td>
     <?php endif; ?>
-      
+
     <td><?php echo link_to(image_tag('/images/icons/file_acrobat.gif',array('alt'=>'esporta in pdf')),'fattura/export?id='.$invoice->getID(),array('target' => '_blank'))?></td>
     <?php if ($invoice->getStato() == 'n'): ?>
     <td><?php echo link_to(image_tag('icons_tango/trash-full.png', 'alt=delete'), 'invoice/delete?id='.$invoice->getId(), 'post=true&confirm=vuoi cancellare questa fattura? title=delete') ?></td>
