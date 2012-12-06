@@ -57,6 +57,7 @@ $fattura->setData(strtotime('+1 month'));
 $fattura->save();
 $test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+1 month")), '->getDate() return the right value');
 
+$fattura->setData(date('d-m-Y', strtotime("+$days days")));
 $fattura->setNewNumFattura();
 $fattura->save();
 $test->ok(!$fattura->isProForma(), '->isProForma() returns right value');
@@ -129,7 +130,7 @@ try
   $fattura->setData(strtotime('-30 days'));
   $fattura->save();
   $test->fail($message);
-  
+
 }
 catch(Exception $e)
 {
