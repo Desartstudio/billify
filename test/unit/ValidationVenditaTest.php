@@ -1,7 +1,7 @@
 <?php
 include_once(dirname(__FILE__).'/../bootstrap/unit.php');
 
-$test = new bfTestUnit(30, new lime_output_color());
+$test = new bfTestUnit(null, new lime_output_color());
 $test->loadData(__DIR__.'/../fixtures/empty.yml');
 $user = $test->signin('new_user');
 
@@ -24,10 +24,15 @@ for($i = 0; $i < 10; $i++)
   $days = $i*2;
   $fattura = new Vendita();
   $fattura->setNewNumFattura();
-  $test->is($fattura->getNumFattura(), $i+1, '->getNumFattura() returns right value');
-  $fattura->setData(strtotime("+$days days"));
-  $user->addFattura($fattura);
-  $user->save();
+  if (date('y',strtotime("+$days days")) == date('y', time()))
+  {
+    $test->is($fattura->getNumFattura(), $i+1, '->getNumFattura() returns right value');
+    $lastNumFattura = $fattura->getNumFattura();
+    $adddays = $days;
+    $fattura->setData(strtotime("+$days days"));
+    $user->addFattura($fattura);
+    $user->save();
+  }
 }
 
 $fattura = new Vendita();
@@ -36,8 +41,8 @@ $user->addFattura($fattura);
 $user->save();
 
 $test->info('Numero nuova fattura');
-$test->is($fattura->getNumFattura(), 11, '->getNumFattura() returns right invoice number');
-$test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+$days days")), '->getDate() return the right value');
+$test->is($fattura->getNumFattura(), $lastNumFattura+1, '->getNumFattura() returns right invoice number');
+$test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+$adddays days")), '->getDate() return the right value');
 $test->ok(!$fattura->isProForma(), '->isProForma() returns right value');
 
 $test->info('Numero nuova fattura quando la trasformo da pro-forma');
@@ -51,17 +56,17 @@ $user->save();
 
 $test->ok($fattura->isProForma(), '->isProForma() returns right value');
 $test->is($fattura->getNumFattura(), 0, '->getNumFattura() returns right invoice number');
-$test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+$days days")), '->getDate() return the right value');
+$test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+$adddays days")), '->getDate() return the right value');
 
 $fattura->setData(strtotime('+1 month'));
 $fattura->save();
 $test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+1 month")), '->getDate() return the right value');
 
-$fattura->setData(date('d-m-Y', strtotime("+$days days")));
+$fattura->setData(date('d-m-Y', strtotime("+$adddays days")));
 $fattura->setNewNumFattura();
 $fattura->save();
 $test->ok(!$fattura->isProForma(), '->isProForma() returns right value');
-$test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+$days days")), '->getDate() return the right value');
+$test->is($fattura->getData('d-m-Y'), date('d-m-Y', strtotime("+$adddays days")), '->getDate() return the right value');
 
 $test->info('Validazione modifica numero fattura');
 
