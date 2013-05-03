@@ -2,7 +2,7 @@
 
 <div class="title">
     <h2><?php echo $contact ?></h2>
-    
+
     <?php if ($sf_user->hasFlash('notice')): ?>
       <span class="notice">- <?php echo __($sf_user->getFlash('notice')); ?></span>
     <?php endif; ?>
@@ -10,7 +10,7 @@
 
 <?php include_partial('contact/info', array('contact' => $contact)); ?>
 
-<div class="title">    
+<div class="title">
     <h2><?php echo __('Invoices list'); ?></h2>
 </div>
 
@@ -33,7 +33,7 @@
 <?php slot('sidebar'); ?>
   <div class="total">
     <span title="il totale è calcolato al netto di IVA"><?php echo format_currency($totale, '&euro;') ?></span>
-    <div class="stimato"><?php echo __('previsione su pro-forma:'); ?> <strong><?php echo format_currency($totale_proforma, '&euro;') ?></strong></div>
+    <div class="stimato"><?php echo __('totale pagato:'); ?> <strong style="color: red;"><?php echo format_currency($totale_pagato, '&euro;') ?></strong><br><?php echo __('previsione su pro-forma:'); ?> <strong><?php echo format_currency($totale_proforma, '&euro;') ?></strong></div>
   </div>
 
   <div class="title">
@@ -43,7 +43,7 @@
   <ul class="ul-list nomb">
     <li>+ <?php echo link_to(__('edit'),'@contact_edit?id='.$contact->getID())?></li>
     <li>+ <?php echo link_to(__('delete'), '@contact_delete?id='.$contact->getId(), 'post=true&confirm='.__('vuoi cancellare questo contatto?').' title=delete') ?></li>
-    <?php if ($contact->getClassKey() == 2): ?>      
+    <?php if ($contact->getClassKey() == 2): ?>
       <li>+ <?php echo link_to(__('new invoice'),'@invoice_purchase_create?fornitore='.$contact->getId()); ?></li>
     <?php else: ?>
       <li>+ <?php echo link_to(__('new invoice'),'@invoice_create_for_client?id_cliente='.$contact->getId()); ?></li>

@@ -450,6 +450,10 @@
         <source>document updated successfully</source>
         <target>documento salvato con successo</target>
       </trans-unit>
+      <trans-unit id="101">
+          <source>parziale</source>
+          <target>pagati €</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

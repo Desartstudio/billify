@@ -2,13 +2,13 @@
 
 class Vendita extends Fattura
 {
-  
+
   const PEER = 'VenditaPeer';
 
   private $with_holding_tax_percentage = '0/100';
   private $max = false;
   private $validate = true;
-  
+
   public function __construct()
   {
     parent::__construct();
@@ -57,9 +57,9 @@ class Vendita extends Fattura
     {
       throw new Exception('Il numero della fattura '.$this->num_fattura.' deve essere consecutivo all\'ultimo numero emesso '.$this->max);
     }
-    
+
   }
-  
+
   public function save(PropelPDO $con = null)
   {
     $this->setDataScadenza($this->getDataPagamento());
@@ -67,7 +67,7 @@ class Vendita extends Fattura
     $this->validation();
     return parent::save($con);
   }
-  
+
   public function getRoutingRule()
   {
       return 'fattura/show';
@@ -102,8 +102,8 @@ class Vendita extends Fattura
   public function checkWithHoldingTax()
   {
     list($percentage,) = explode('/', $this->with_holding_tax_percentage);
-    
-    if ($this->getCalcolaRitenutaAcconto() == 'n' || 
+
+    if ($this->getCalcolaRitenutaAcconto() == 'n' ||
        ($this->getCliente() && ($this->getCliente()->getAzienda() != 's' || $this->getCliente()->getCalcolaRitenutaAcconto() == 'n')) ||
        0 === (int)$percentage)
     {
@@ -156,6 +156,7 @@ class Vendita extends Fattura
     if ($this->getData() != "")
     {
       $year = date('y', strtotime($this->getData()));
+      $data = date('y-m-d', strtotime($this->getData()));
     }
 
     $query = 'SELECT MAX(CAST(' . FatturaPeer::NUM_FATTURA . ' AS UNSIGNED)) as max'
@@ -207,7 +208,7 @@ class Vendita extends Fattura
 
       $num_fattura = $num_fattura + 1;
     }
-
+    var_dump($num_fattura);
     $this->setData($data);
     $this->setNumFattura($num_fattura);
   }

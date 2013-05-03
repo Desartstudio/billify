@@ -27,9 +27,9 @@ class AcquistoForm extends FatturaForm
     $widgets['class_key'] = new sfWidgetFormInputHidden();
     $widgets['stato'] = new sfWidgetFormSelect(array('choices' => self::$states));
     $widgets['data_stato'] = new sfWidgetFormDateJQueryUI(array("change_month" => true, "change_year" => true, 'culture' => 'it', 'show_button_panel' => true));
-    
+
     $widgets['data'] = new sfWidgetFormDateJQueryUI(array("change_month" => true, "change_year" => true, 'culture' => 'it', 'show_button_panel' => true));
-    
+
     $this->widgetSchema->moveField('data_stato', sfWidgetFormSchema::AFTER, 'stato');
 
     $this->widgetSchema->setLabel('modo_pagamento_id', 'Modo pagamento');
@@ -39,19 +39,19 @@ class AcquistoForm extends FatturaForm
 
     $this->setDefault('class_key', FatturaPeer::CLASSKEY_ACQUISTO);
     $this->setDefault('num_fattura', '');
-    
+
     $this->validatorSchema['vat']->setOption('required', true);
     $this->validatorSchema['num_fattura']->setOption('required', true);
     $this->validatorSchema['cliente_id']->setOption('required', true);
 
     $this->validatorSchema['data']->setOption('date_format', '~(?P<day>\d{2})/(?P<month>\d{2})/(?P<year>\d{4})~');
     $this->validatorSchema['data_stato']->setOption('date_format', '~(?P<day>\d{2})/(?P<month>\d{2})/(?P<year>\d{4})~');
-    
+
     $categoriaCriteria = new Criteria;
     $categoriaCriteria->addAscendingOrderByColumn(CategoriaPeer::NOME);
     $this->widgetSchema['categoria_id']->setOption('criteria', $categoriaCriteria);
-    
-    
+
+
     unset(
       $this['id_utente'],
       $this['contatto_string'],
@@ -65,7 +65,8 @@ class AcquistoForm extends FatturaForm
       $this['calcola_ritenuta_acconto'],
       $this['includi_tasse'],
       $this['calcola_tasse'],
-      $this['id_tema_fattura']
+      $this['id_tema_fattura'],
+      $this['pagato_parzialmente']
     );
 
     $this->validatorSchema->setPostValidator(new ValidatorPaidInvoce());

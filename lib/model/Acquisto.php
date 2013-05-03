@@ -22,7 +22,19 @@ class Acquisto extends Fattura
 
   public function getTotale()
   {
-    return $this->imponibile + $this->imposte;
+      $totale = $this->imponibile + $this->imposte;
+
+      if (isset($this->pie_di_lista))
+      {
+          $totale = $totale + $this->pie_di_lista;
+      }
+
+      if (isset($this->ritenuta_dacconto))
+      {
+          $totale = $totale - $this->ritenuta_dacconto;
+      }
+
+    return $totale ;
   }
 
   public function checkInRitardo()

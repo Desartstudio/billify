@@ -20,26 +20,30 @@ abstract class Fattura extends BaseFattura
   const NON_PAGATA = 'n';
   const RIFIUTATA = 'r';
   const INVIATA = 'i';
+  const PARZIALE = 'a';
 
   protected $stato_string = array(
       self::NON_PAGATA => 'non inviata',
       self::PAGATA => 'pagata',
       self::RIFIUTATA => 'rifiutata',
-      self::INVIATA => 'inviata'
+      self::INVIATA => 'inviata',
+      self::PARZIALE => 'pagata parzialmente'
   );
 
   protected $font_color_stato = array(
       self::NON_PAGATA => 'black',
       self::PAGATA => 'black',
       self::RIFIUTATA => 'black',
-      self::INVIATA => 'white'
+      self::INVIATA => 'white',
+      self::PARZIALE => 'black'
   );
 
   protected $color_stato = array(
       self::NON_PAGATA => 'warning',
       self::PAGATA => 'success',
       self::RIFIUTATA => 'important',
-      self::INVIATA => 'info'
+      self::INVIATA => 'info',
+      self::PARZIALE => 'notice'
   );
 
   protected $imponibile = 0;

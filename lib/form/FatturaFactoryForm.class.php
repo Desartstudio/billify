@@ -3,7 +3,7 @@
 Class FatturaFactoryForm{
 
   public function __construct() {
-    
+
   }
 
   public function build($class_key, $model = null) {
@@ -11,7 +11,7 @@ Class FatturaFactoryForm{
       $class_name = get_class($model).'Form';
       return   new $class_name($model);
     }
-    
+
     switch ($class_key)
     {
       case FatturaPeer::CLASSKEY_VENDITA;

@@ -61,6 +61,7 @@ class FatturaPeer extends BaseFatturaPeer
   {
     $criteria = FatturaPeer::getSqlFattureEmesse();
     $criteria->add(FatturaPeer::STATO, Vendita::INVIATA);
+    $criteria->addOr(FatturaPeer::STATO, Vendita::PARZIALE);
 
     return VenditaPeer::doSelectJoinAllExceptModoPagamento($criteria);
   }
@@ -115,7 +116,7 @@ class FatturaPeer extends BaseFatturaPeer
     return FatturaPeer::getInvoicesForContactByYear($contact, $year, $criteria);
   }
 
-  public static function calculateTotalFromInvoices( array $invoices, $exclude_pro_forma = true, $net_price = true)
+  public static function calculateTotalFromInvoices( array $invoices, $exclude_pro_forma = true, $net_price = true, $paid = false)
   {
     $total = 0;
 
@@ -127,7 +128,25 @@ class FatturaPeer extends BaseFatturaPeer
 
       if (!($exclude_pro_forma && $invoice->isProForma()))
       {
-          $total += $invoice->$method();
+          if ($paid)
+          {
+              if ($invoice->getStato() == 'a' )
+              {
+                $total += $invoice->getPagatoParzialmente();
+              }
+
+              if($invoice->getStato() == 'p')
+              {
+                $total += $invoice->$method();
+              }
+
+          }
+          else
+          {
+              $total += $invoice->$method();
+          }
+
+
       }
     }
 

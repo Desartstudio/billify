@@ -3,7 +3,7 @@
 class fatturaActions extends sfActions
 {
   var $cliente = null;
-  
+
   public function executeIndex()
   {
     $this->forward('invoice', 'indexSale');
@@ -43,12 +43,12 @@ class fatturaActions extends sfActions
 
   public function executeEdit($request)
   {
-    $this->cliente = ContattoPeer::retrieveByPK($request->getParameter('id_cliente'));    
+    $this->cliente = ContattoPeer::retrieveByPK($request->getParameter('id_cliente'));
     $this->fattura = VenditaPeer::retrieveByPk($this->getRequestParameter('id'));
-    
+
     $this->forward404Unless($this->fattura instanceof Fattura);
     $this->redirectUnless($this->fattura->isEditable(), 'fattura/show?id='.$this->fattura->getId());
-    
+
     $this->makeFattura();
   }
 
@@ -59,7 +59,7 @@ class fatturaActions extends sfActions
     {
       $this->id_cliente = $this->getRequestParameter('id_cliente');
       $this->forward404Unless($this->cliente instanceof Cliente);
-      
+
       if ($this->fattura->isNew() && $this->getUser()->getSettings()->getBoolFatturaAutomatica()) //UtentePeer::getImpostazione()->getBoolFatturaAutomatica())
       {
         $this->getRequest()->setParameter('cliente_id', $this->cliente->getID());
@@ -73,9 +73,9 @@ class fatturaActions extends sfActions
         $this->getRequest()->setParameter('data', date("d/m/Y", time()));
         $this->getRequest()->setParameter('num_fattura', $this->fattura->getNumFattura());
 		$this->getRequest()->setParameter('id_tema_fattura', $this->fattura->getIdTemaFattura());
-        
+
         $this->updateFattura($this->fattura);
-        
+
       }
     }
 
@@ -96,7 +96,7 @@ class fatturaActions extends sfActions
   {
     return true;
   }
-  
+
   public function executeUpdate()
   {
     $id = $this->getRequestParameter('id', 0);
@@ -109,7 +109,7 @@ class fatturaActions extends sfActions
     $fattura = VenditaPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($fattura instanceof Fattura);
     $this->redirectUnless($fattura->isEditable(), 'fattura/show?id='.$fattura->getId());
-    
+
     $fattura->delete();
 
     if ($this->getRequestParameter('cliente_id') && $forward)
@@ -135,8 +135,15 @@ class fatturaActions extends sfActions
       $fattura->setDataStato("$y-$m-$d");
     }
 
+    if ($request->getParameter('pagato_parzialmente'))
+    {
+        $fattura->setPagatoParzialmente($request->getParameter('pagato_parzialmente'));
+    }
+
     if ($fattura->isProForma() && $request->getParameter('regolare') == 'y')
+    {
       $fattura->setRegolare();
+    }
 
     $fattura->save();
 
@@ -160,7 +167,7 @@ class fatturaActions extends sfActions
   {
     $id = $this->getRequestParameter('id', 0);
     $fattura = FatturaPeer::getFatturaOrCreate($id, $this->cliente);
-    
+
     if ($fattura->getCalcolaRitenutaAcconto() == 's')
       $fattura->setCalcolaRitenutaAcconto('n');
     elseif ($fattura->getCalcolaRitenutaAcconto() == 'n')
@@ -177,7 +184,7 @@ class fatturaActions extends sfActions
   {
     $id = $this->getRequestParameter('id', 0);
     $fattura = FatturaPeer::getFatturaOrCreate($id, $this->cliente);
-    
+
     $fattura->setIncludiTasse($fattura->getIncludiTasse() == 'n' ? 's' : 'n');
     $fattura->save();
 
@@ -188,7 +195,7 @@ class fatturaActions extends sfActions
   {
     $id = $this->getRequestParameter('id', 0);
     $fattura = FatturaPeer::getFatturaOrCreate($id, $this->cliente);
-    
+
     $fattura->setCalcolaTasse($fattura->getCalcolaTasse() == 'n' ? 's' : 'n');
     $fattura->save();
 
@@ -283,7 +290,7 @@ class fatturaActions extends sfActions
       $fattura->setCalcolaTasse($this->getRequestParameter('calcola_tasse'));
       $fattura->setIdUtente($this->getUser()->getAttribute('id_utente'));
       $fattura->save();
-      
+
       $fattura->setIdTemaFattura($this->getRequestParameter('id_tema_fattura'));
       $fattura->save();
     }

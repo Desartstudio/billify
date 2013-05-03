@@ -6,7 +6,7 @@ Categoria:
     nome: Test Categoria 2
   Categoria3:
     nome: Test Categoria 3
-    
+
 Utente:
   Utente_1:
     username: user
@@ -30,7 +30,7 @@ TemaFattura:
   TemaFattura_2:
     id_utente: Utente_1
     nome: temaa doc
-    template: abc 
+    template: abc
   TemaFattura_1:
     id_utente: Utente_1
     nome: ideato srl

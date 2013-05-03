@@ -46,13 +46,13 @@ class contactActions extends sfActions
   public function executeShow($request)
   {
     $this->contact = ContattoPeer::retrieveByPK($request->getParameter('id'));
-
     $this->year = $request->getParameter('year', date('Y'));
     $this->invoices = FatturaPeer::getInvoicesForContactByYear( $this->contact, $this->year );
-        
+
     $this->totale = FatturaPeer::calculateTotalFromInvoices( $this->invoices );
+    $this->totale_pagato = FatturaPeer::calculateTotalFromInvoices( $this->invoices, true, true, true);
     $this->totale_proforma = FatturaPeer::calculateTotalFromInvoices( $this->invoices, false );
-    
+
   }
 
   public function executeEdit($request)
