@@ -6,10 +6,8 @@
 /doc/*
 /nbproject
 .git
-web/billify.php
 .htaccess
 /test
 /build
 .gitignore
 README.md
-/config

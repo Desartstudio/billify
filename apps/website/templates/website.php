@@ -31,16 +31,16 @@
         <hr class="noscreen" />
         <div id="nav">
             <a href="<?php echo url_for('@homepage')?>" id="nav-active">Home</a> <span>|</span>
-            <a href="http://www.ideato.it/Azienda/Chi-siamo" target="_blank"><?php echo __('About')?></a> <span>|</span>
+            <a href="http://www.ideato.it/chi-siamo/team/" target="_blank"><?php echo __('About')?></a> <span>|</span>
             <!--a href="<?php echo url_for('@content?page=support')?>"><?php echo __('Support')?></a> <span>|</span-->
-            <a href="http://www.ideato.it/Azienda/Contatti" target="_blank"><?php echo __('Contat us')?></a>
+            <a href="http://www.ideato.it/chi-siamo/contattaci/" target="_blank"><?php echo __('Contat us')?></a>
         </div>
     </div>
     
     <div id="tray">
         <ul>
             <li><a href="<?php echo url_for('@content?page=demo')?>">Demo</a></li>
-            <li><a href="<?php echo url_for('@content?page=download')?>">Download</a></li>
+            <li><a href="https://github.com/ideatosrl/billify" target="_blank">Download</a></li>
         </ul>
     <hr class="noscreen" />
     </div>
